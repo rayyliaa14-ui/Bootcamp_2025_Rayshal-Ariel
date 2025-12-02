@@ -1,2 +1,2 @@
-rayshal ariel ke 2
+rayshal ariel 2
 file_2.txt
