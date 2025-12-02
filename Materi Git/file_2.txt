@@ -1,2 +1,5 @@
-rayshal ariel 2
-file_2.txt
+cd path/to/project
+git init
+git remote add origin <URL-REPO>
+git fetch
+git branch -u origin/main
