@@ -1,1 +1,1 @@
-console.log("Hello World")
+console.log("Nama : Rayshal Ariel Aliansyah \nPanggilan = Ray / sal\nAlamat = Bandung, Bojongsoang\nNo.Telp = 085142166613\nHobby = Main game, Ngulik, Nonton film")
