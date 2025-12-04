@@ -10,4 +10,5 @@ const main = async() => {
     contacts.push(contact);
     fs.writeFileSync('data/contacs.json'.JSON.stringify(contacts));
     console.log('thanks');
+    
 }
