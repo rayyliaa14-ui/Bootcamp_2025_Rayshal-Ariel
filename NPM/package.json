@@ -7,8 +7,15 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "start": "node index",
+    "start": "nodemon apps.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "fol": "ls"
+    
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  },
+  "dependencies": {
+    "validator": "^13.15.23"
   }
 }
