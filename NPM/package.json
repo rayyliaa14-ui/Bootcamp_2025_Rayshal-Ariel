@@ -1,0 +1,13 @@
+{
+  "name": "npm",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Rayshal Ariel",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
