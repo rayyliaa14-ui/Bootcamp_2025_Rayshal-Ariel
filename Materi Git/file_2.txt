@@ -3,3 +3,6 @@ git init
 git remote add origin <URL-REPO>
 git fetch
 git branch -u origin/main
+
+buat 1 file js 'contact.js"
+pindahin fungsi dari app js ke contact js
