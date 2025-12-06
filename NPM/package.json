@@ -7,15 +7,15 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon apps.js",
+    "start": "nodemon yargs/index.js add --name='ray' --email='ray@gmail.com' --mobile='123'",
     "test": "echo \"Error: no test specified\" && exit 1",
     "fol": "ls"
-    
   },
   "devDependencies": {
     "nodemon": "^3.1.11"
   },
   "dependencies": {
-    "validator": "^13.15.23"
+    "validator": "^13.15.23",
+    "yargs": "^18.0.0"
   }
 }
