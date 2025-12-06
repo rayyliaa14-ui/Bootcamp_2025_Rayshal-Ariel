@@ -1,6 +1,18 @@
 const fs = require('fs');
 const readline = require('readline');
 
+//Apakah Folder dan File sudah ada?
+const dPath = './data';
+if(!fs.existsSync(dPath)){
+    fs.mkdirSync(dPath);
+}
+
+//cek apakah sudah ada file?
+const dataPath = './data/contact.json';
+if(!fs.existsSync(dataPath)){
+    fs.writeFileSync(dataPath,'[]','utf-8');
+} 
+
 //Dekalari rl sebagai I/O
 const rl = readline.createInterface({
     input:process.stdin,
@@ -17,18 +29,16 @@ const question = (ask) =>{
 }
 
 //Proses input data
-const main = async() => {
-    const name = await question('What is your name? ');
-    const phone = await question('What is your phone number? ');
-    const email = await question('What is your email? ');
-
+const saveContact = (name,phone,email) => {
     const contact = {name,phone,email};
     const file = fs.readFileSync('./data/contact.json','utf8');
+    console.log(file);
     const contacts = JSON.parse(file);
+    console.log(contacts);
     contacts.push(contact);
     fs.writeFileSync('./data/contact.json',JSON.stringify(contacts));
         console.log("Thanks for input the data!");
         rl.close();
     }
 
-    module.exports = { main };
+    module.exports = { saveContact, question };
