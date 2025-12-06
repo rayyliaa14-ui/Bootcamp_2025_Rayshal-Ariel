@@ -1,21 +1,20 @@
 //Deklarasi variable 
 const fs = require('fs');
+// const Readline = require('readline/promises');
+const mainContacts = require('./contact.js');
 
-const Readline = require('readline/promises');
-const { main } = require('./contact.js');
+const main = async() => {
+    const name = await mainContacts.question("What is your name? ");
+    const phone = await mainContacts.question("What is your phone number? ");
+    const email = await mainContacts.question("What is your email? ");
 
-
-//Apakah Folder dan File sudah ada?
-const dPath = './data';
-if(!fs.existsSync(dPath)){
-    fs.mkdirSync(dPath);
+    mainContacts.saveContact(name,phone,email);
 }
 
-//cek apakah sudah ada file?
-const dataPath = './data/contact.json';
-if(!fs.existsSync(dataPath)){
-    fs.writeFileSync(dataPath,'[]','utf-8');
-} 
+main();
 
 
-    main();
+    // const name = await question('What is your name? ');
+    //     const phone = await question('What is your phone number? ');
+    //     const email = await question('What is your email? ');
+    
