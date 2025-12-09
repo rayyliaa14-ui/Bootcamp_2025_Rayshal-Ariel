@@ -8,7 +8,9 @@ const fs = require('fs');
 const dataContact = require('./saveOpt.js');
 const yargs = require('yargs');
 const { hideBin } = require('yargs/helpers');
+
 const { saveContact } = require('./saveOpt.js');
+const { type } = require('os');
 
 yargs(hideBin(process.argv))
     .command({
@@ -22,7 +24,7 @@ yargs(hideBin(process.argv))
             },
             email: {
                 describe: 'contact email',
-                demandOption: false,
+                demandOption: true,
                 type:'string',
             },
             mobile:{
@@ -40,6 +42,41 @@ yargs(hideBin(process.argv))
             // console.log(contact);
             saveContact(contact);
         },
+    })
+    .command({
+        command:'list',
+        describe:'contact list',
+        handler(){
+            dataContact.listContact();
+        }
+    })
+    .command({
+        command: 'detail',
+        describe: 'detail contact by name',
+        builder: {
+            name:{
+                describe:'Contact name',
+                demandOption: true,
+                type: 'string',
+            },
+        },
+        handler(argv){
+            dataContact.detailContact(argv.name);
+        }
+    })
+    .command({
+        command:'delete',
+        describe:'Delete Contact',
+        builder:{
+            name:{
+                describe:'Delete contact',
+                demandOption:true,
+                type:'string',
+            }
+        },
+        handler(argv){
+            dataContact.deleteContact(argv.name);
+        }
     })
     .demandCommand()
     .parse();
