@@ -1,49 +1,63 @@
-const express = require('express')
-const app = express()
-const port = 3000
+const express = require('express');
+const expressLayout = require('express-ejs-layouts');
+const app = express();
+const port = 3000;
 const fs = require('fs');
 
-//information about ejs
-app.set('view engine','ejs');
+// Set EJS as view engine
+app.set('view engine', 'ejs');
+app.use(expressLayout);
 
+// Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Route Home
 app.get('/', (req, res) => {
-  const contact = [{
-    name:'ray',
-    email:'ray@gmail.com',
-  },{
-    name:'sal',
-    email:'sal@yahoo.com',
-  },{
-    name:'ariel',
-    email:'ariel@try.com',
-  }];
-  res.render('index', {name: "rayshal", title: "Webserver EJS",contact});
-})
-app.get('/contact', (req, res) => {
-  res.render('contact');
-})
-app.get('/about', (req, res) => {
-  res.render('about')
-  // res.sendFile('./views/about.html', {root: __dirname});
-})
+  const contact = [
+    { name: 'ray', email: 'ray@gmail.com' },
+    { name: 'sal', email: 'sal@yahoo.com' },
+    { name: 'ariel', email: 'ariel@try.com' }
+  ];
 
-app.get('/produk/:id', (req, res) => {
-    res.send(` product ID = ${req.params.id} 
-      <br> category = ${req.query.category}`);
+  res.render('index', {
+    name: "rayshal",
+    title: "Webserver EJS",
+    contact,
+    layout: 'layout/main-layouts'
+  });
 });
 
-app.use('/',(req,res) =>{
-    res.status(404);
-    res.send('page not found');
-})
+// Route Contact
+app.get('/contact', (req, res) => {
+  res.render('contact', {
+    title: "Contact EJS",
+    layout: 'layout/main-layouts'
+  });
+});
+
+// Route About
+app.get('/about', (req, res) => {
+  res.render('about', {
+    layout: 'layout/main-layouts',
+    title: "About EJS"
+  });
+});
+
+// Route Produk
+app.get('/produk/:id', (req, res) => {
+  res.send(`
+    product ID = ${req.params.id} 
+    <br> category = ${req.query.category}
+  `);
+});
+
+// 404 Handler
+app.use('/', (req, res) => {
+  res.status(404).send('page not found');
+});
+
+// Start server
 app.listen(port, () => {
-  console.log(`Example app listening on port [${port}]`)
-})
-
-
-
-
-
+  console.log(`Example app listening on port [${port}]`);
+});

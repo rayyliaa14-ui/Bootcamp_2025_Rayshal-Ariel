@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
-</head>
-<body>
-    <h1>Hello World</h1>
-    <p>Link list</p>
-    <ul>
-        <li><a href="/">home</a></li>
-        <li><a href="/about">about</a></li>
-        <li><a href="/contact">contact</a></li>
-    </ul>
+<%- include('layout/header') %>
     <h1>web server</h1>
     <p>list contact</p>
     <% if (contact < 2) { %>
@@ -23,5 +9,4 @@
             <li><%= contacts.name  %> - <%= contacts.email %></li>
         </ul>
     <% }) }%>
-</body>
-</html>
+<%- include('layout/footer') %>
