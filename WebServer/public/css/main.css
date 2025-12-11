@@ -1,0 +1,86 @@
+/* body style */
+
+.image {
+    width: 200px;
+    border-radius: 20px;
+}
+body {
+    background-color: rgb(51, 69, 83);
+}
+
+p {
+    margin: 0;
+}
+
+.container {
+    justify-content: center;
+    align-items: center;
+}
+.row {
+    justify-content: center;
+    align-items: center;
+}
+.col-text-center {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+/* navbar */
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(0, 36, 46);
+    height: 50px;
+}
+
+.nav-container p {
+    padding-left: 50px;
+    font-family: "Geom", sans-serif;
+    color: white;
+}
+
+.nav-sub-container{
+    display: flex;
+    padding-right: 50px;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-sub-container ul {
+    display: flex;
+    margin: 0;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-sub-container a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-family: "Geom", sans-serif;
+}
+
+/* About Page [Profile Section]*/
+
+.col-text-center h1 {
+    font-family: "Geom", sans-serif;
+    color: rgb(255, 255, 255);
+}
+
+.about-profile {
+    background-color: rgb(0, 36, 46);
+    border-radius: 20px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.about-profile p {
+    font-family: "Geom", sans-serif;
+    color: white;
+    padding: 10px 0px 10px 0px;
+}
