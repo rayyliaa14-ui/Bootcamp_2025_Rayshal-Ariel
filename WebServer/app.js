@@ -2,9 +2,19 @@ const express = require('express');
 const expressLayout = require('express-ejs-layouts');
 const morgran = require('morgan');
 
+//Catch data from funct.js
+const { loadContact, list_Data } = require('./func');
+
+//function findContact
+const findContact = (name) => {
+  const contacts = loadContact();
+  return contacts.find(c=>c.name.toLowerCase() === name.toLowerCase());
+};
+
 const app = express();
 const port = 3000;
 const fs = require('fs');
+const { title } = require('process');
 
 // Set EJS as view engine
 app.set('view engine', 'ejs');
@@ -46,11 +56,36 @@ app.get('/', (req, res) => {
 
 // Route Contact
 app.get('/contact', (req, res) => {
+  const contact = loadContact();
   res.render('contact', {
     title: "Contact EJS",
-    layout: 'layout/main-layouts'
+    layout: 'layout/main-layouts',
+    nama: 'ray',
+    contact
   });
 });
+
+//route add
+app.get('/contact/add',(req,res)=>{
+  res.render('add',{
+    layout: 'layout/main-layouts',
+    title: 'Add Page'
+  })
+})
+
+
+//route get contact to detail
+app.get('/contact/:name', (req, res) => {
+  const contact = findContact(req.params.name);
+  res.render('detail',
+    {
+      layout:'layout/main-layouts',
+      title:'Detail Contact',
+      contact,
+    }
+  );
+});
+
 
 // Route About
 app.get('/about', (req, res, next) => {
