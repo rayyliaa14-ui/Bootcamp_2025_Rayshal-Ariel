@@ -5,3 +5,5 @@ NPM/node_modules
 WebServer/node_modules
 WebServer/package.json
 WebServer/package-lock.json
+WebServer/nodemon.json
+Self_Practice/yargs

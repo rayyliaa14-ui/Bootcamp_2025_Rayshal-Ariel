@@ -3,7 +3,7 @@ const expressLayout = require('express-ejs-layouts');
 const morgran = require('morgan');
 
 //Catch data from funct.js
-const { loadContact, list_Data } = require('./func');
+const { loadContact,saveContact } = require('./func');
 
 //function findContact
 const findContact = (name) => {
@@ -15,6 +15,7 @@ const app = express();
 const port = 3000;
 const fs = require('fs');
 const { title } = require('process');
+const { error } = require('console');
 
 // Set EJS as view engine
 app.set('view engine', 'ejs');
@@ -27,6 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgran('dev'));
 
+//          <== Route ==>         //
 
 app.use((req, res, next) => {
   console.log('Time:', Date.now())
@@ -69,9 +71,27 @@ app.get('/contact', (req, res) => {
 app.get('/contact/add',(req,res)=>{
   res.render('add',{
     layout: 'layout/main-layouts',
-    title: 'Add Page'
+    title: 'Add Page',
+    errno:"hi"
   })
 })
+
+//route data - transcive data 
+const controllData = (req,res,next) => {
+  const {name,email,number} = req.body;
+  const resultData = saveContact(name,email,number);
+  if(!resultData.valid){ 
+    res.render('add',{
+      title: 'add page',
+      layout: 'layout/main-layouts',
+      errno: resultData.message || 'welcome'
+    });
+  } else {
+    res.redirect('/contact');
+  }
+};
+
+app.post('/contact/add', controllData)
 
 
 //route get contact to detail
@@ -81,7 +101,7 @@ app.get('/contact/:name', (req, res) => {
     {
       layout:'layout/main-layouts',
       title:'Detail Contact',
-      contact,
+      contact: contact,
     }
   );
 });
@@ -94,6 +114,7 @@ app.get('/about', (req, res, next) => {
     title: "About EJS"
   });
 });
+
 
 //Route testing !!
 app.get('/tester',(req,res)=>{

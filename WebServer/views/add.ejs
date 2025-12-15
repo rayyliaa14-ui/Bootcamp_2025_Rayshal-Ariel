@@ -1,33 +1,19 @@
-<!-- <form>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Name</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your name">
-  </div>
-   <div class="form-group">
-    <label for="exampleInputEmail1">Email</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your email">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-  </div>
-   <div class="form-group">
-    <label for="exampleInputEmail1">Mobile number</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your mobile number">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your mobile number with anyone else.</small>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form> -->
-
 <div class="add-container">
   <div class="form-container">
     <div class="regis-form">
       <img src="/image/registpfp.png" alt="regpfp">
-      <p>add new contact!</p>
+      <p><%= errno %></p>
     </div>
-    <div class="regis-input">
-      <input type="text" placeholder="Fullname" class="reg-input"><br>
-      <input type="email" placeholder="Email" class="reg-input"><br>
-      <input type="text" id="phone" placeholder="Mobile number" class="reg-input" pattern="[0-9]{10,15}"><br>
-      <input type="submit" class="button">
-    </div>
+    
+      <form action="/contact/add/" method="post">
+        <div class="regis-input">
+          <input type="text" placeholder="Fullname" class="reg-input" name="name" required><br>
+          <input type="email" placeholder="Email" class="reg-input" name="email" required><br>
+          <input type="text" id="phone" placeholder="Mobile number" class="reg-input" name="number" required><br>
+          <input type="submit" class="button">
+        </div>
+      </form>
+      
   </div>
 </div>
 
