@@ -35,7 +35,7 @@ const validationData = (contact_input) => {
     }
   }
 
-  // mobile
+  // mobiles
   if (contact_input.mobile) {
     if (!validator.isMobilePhone(contact_input.mobile, 'id-ID')) {
       return { valid: false, message: 'Your number is not valid' };
