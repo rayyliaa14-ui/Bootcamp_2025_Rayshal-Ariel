@@ -1,53 +1,60 @@
 const fs = require('fs');
-
-// cek folder 
-const folPath = './data';
-// if(!fs.existsSync(folPath)){
-//     fs.mkdirSync(folPath);
-// }
+const validator = require('validator');
 
 const filePath = './data/contact.json';
-// if(!fs.existsSync(filePath)){
-//     fs.writeFileSync(filePath,'[]','utf-8');
-// };
 
-//buat load data parsing
+// Load all contacts
 const loadContact = () => {
-    const fileData = fs.readFileSync('./data/contact.json','utf-8');
-    const contactData = JSON.parse(fileData);
-    return contactData;
-}
+  try {
+    return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+  } catch (err) {
+    return [];
+  }
+};
 
-const saveContact = (name,email,mobile) => {
-    data_input = {name,email,mobile};
-    const contacts = loadContact();
-    //cek apakah ada duplikasi
-    const duplicate = contacts.find((c) => c.name === name);
-    if(duplicate){
-        return {valid: false, message: "Your name already exist"};
-    }
-    //cek email
-    const validate = require('validator');
-    if(email){
-        if(!validate.isEmail(email)){
-            return {valid: false, message: "Your email isnt valid"};
-        }
-    }
-    //cek hp
-    if(mobile){
-        if(!validate.isMobilePhone(mobile,'id-ID')){
-            return {valid: false, message: "Your number isnt valid"};
-        }
-    }
-    console.log(mobile);
-    contacts.push(data_input);
-    fs.writeFileSync(filePath,JSON.stringify(contacts,null, 2));
-    console.log("data saved to json ---");
-    return {valid: true};
-} 
+// Save all contacts
+const saveContact = (contacts) => {
+  fs.writeFileSync(filePath, JSON.stringify(contacts, null, 2));
+};
 
+// Validation
+const validationData = (contact_input) => {
+  const contacts = loadContact();
 
-module.exports = { loadContact, saveContact};
+  // Duplicate check
+  const duplicate = contacts.find(
+    c => c.name.toLowerCase() === contact_input.name.toLowerCase() ||
+         (contact_input.email && c.email.toLowerCase() === contact_input.email.toLowerCase()) ||
+         (contact_input.mobile && c.mobile === contact_input.mobile)
+  );
 
+  if (duplicate) return { valid: false, message: 'Your data already exists' };
 
+  // Email check
+  if (contact_input.email && !validator.isEmail(contact_input.email)) {
+    return { valid: false, message: 'Your email is not valid' };
+  }
 
+  // Mobile check
+  if (contact_input.mobile && !validator.isMobilePhone(contact_input.mobile, 'id-ID')) {
+    return { valid: false, message: 'Your number is not valid' };
+  }
+
+  return { valid: true };
+};
+
+// Add contact
+const addContact = (contact_input) => {
+  const contacts = loadContact();
+  contacts.push(contact_input);
+  saveContact(contacts);
+};
+
+// Delete contact
+const delData = (name) => {
+  const contacts = loadContact();
+  const filtered = contacts.filter(c => c.name.toLowerCase() !== name.toLowerCase());
+  saveContact(filtered);
+};
+
+module.exports = { loadContact, addContact, validationData, delData };

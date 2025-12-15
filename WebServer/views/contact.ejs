@@ -1,40 +1,40 @@
-
-
 <div class="contact-container">
   <div class="contact-title">
     <h1>Contact List</h1>
   </div>
+
   <a href="/contact/add" class="btn btn-success">Create new contact</a>
+
   <div class="contact-table">
     <table class="table table-striped table-dark">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Nama</th>
-        <th scope="col">Mobile</th>
-        <th scope="col">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-        <% var count = 0 %>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nama</th>
+          <th>Mobile</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% let count = 0; %>
         <% contact.forEach(c => { %>
           <tr>
-        <th scope="row"><%= ++count %></th>
-        <td><%= c.name  %> </td>
-        <td><%= c.mobile %></td>
-          <td>
-          <a href="/contact/<%= c.name %>" class="btn btn-primary">Detail</a>
-          </td>
-      </tr>
-      <% })%>
-    </tbody>
-    <tfoot>
-    <tr>
-      <td colspan="4" class="table-footer">
-        Total Contact: <%= contact.length %>
-      </td>
-    </tr>
-  </tfoot>
+            <th><%= ++count %></th>
+            <td><%= c.name %></td>
+            <td><%= c.mobile %></td>
+            <td>
+              <a href="/contact/<%= c.name %>" class="btn btn-primary">Detail</a>
+              <a href="/contact/update/<%= c.name %>" class="btn btn-warning">Update</a>
+              <a href="/contact/delete/<%= c.name %>" class="btn btn-danger" onclick="return confirm('Delete <%= c.name %>?')">Delete</a>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="4">Total Contact: <%= contact.length %></td>
+        </tr>
+      </tfoot>
     </table>
   </div>
 </div>

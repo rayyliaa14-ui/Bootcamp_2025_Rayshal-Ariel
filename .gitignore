@@ -1,9 +1,18 @@
+# Mac system files
 .DS_Store
-Bootcamp_2025_Rayshal-Ariel/
-NPM/package-lock.json
-NPM/node_modules
-WebServer/node_modules
-WebServer/package.json
+
+# Node modules
+node_modules/
+package-lock.json
+
+# Editor / IDE
+.vscode/
+*.log
+
+# Project specific
+WebServer/node_modules/
 WebServer/package-lock.json
 WebServer/nodemon.json
-Self_Practice/yargs
+
+# Self practice
+Self_Practice/

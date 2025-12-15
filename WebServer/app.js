@@ -1,149 +1,151 @@
 const express = require('express');
 const expressLayout = require('express-ejs-layouts');
-const morgran = require('morgan');
-
-//Catch data from funct.js
-const { loadContact,saveContact } = require('./func');
-
-//function findContact
-const findContact = (name) => {
-  const contacts = loadContact();
-  return contacts.find(c=>c.name.toLowerCase() === name.toLowerCase());
-};
+const morgan = require('morgan');
+const { body, validationResult } = require('express-validator');
+const { loadContact, addContact, delData } = require('./func');
 
 const app = express();
 const port = 3000;
-const fs = require('fs');
-const { title } = require('process');
-const { error } = require('console');
 
-// Set EJS as view engine
+// View engine
 app.set('view engine', 'ejs');
 app.use(expressLayout);
 
-
 // Middleware
-app.use(express.static('public'))
+app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(morgran('dev'));
-
-//          <== Route ==>         //
+app.use(morgan('dev'));
 
 app.use((req, res, next) => {
-  console.log('Time:', Date.now())
-  next()
-})
-
-app.use((req,res,next) => {
-  console.log(`request catch : ${req.method} ${req.url}`);
+  console.log('Time:', Date.now());
+  console.log(`Request catch: ${req.method} ${req.url}`);
   next();
-})
+});
 
-// Route Home
+// Helper functions
+const findContact = (name) => {
+  const contacts = loadContact();
+  return contacts.find(c => c.name.toLowerCase() === name.toLowerCase());
+};
+
+const isDuplicateName = (name) => {
+  const contacts = loadContact();
+  return contacts.find(c => c.name.toLowerCase() === name.toLowerCase());
+};
+
+// Routes
+
+// Home
 app.get('/', (req, res) => {
-  const contact = [
-    { name: 'ray', email: 'ray@gmail.com' },
-    { name: 'sal', email: 'sal@yahoo.com' },
-    { name: 'ariel', email: 'ariel@try.com' }
-  ];
-
   res.render('index', {
-    name: "rayshal",
-    title: "Webserver EJS",
-    contact,
-    layout: 'layout/main-layouts'
+    name: 'rayshal',
+    title: 'Webserver EJS',
+    layout: 'layout/main-layouts',
+    contact: loadContact()
   });
 });
 
-// Route Contact
+// Contact list
 app.get('/contact', (req, res) => {
-  const contact = loadContact();
   res.render('contact', {
-    title: "Contact EJS",
+    title: 'Contact EJS',
     layout: 'layout/main-layouts',
-    nama: 'ray',
+    contact: loadContact()
+  });
+});
+
+// Add contact page
+app.get('/contact/add', (req, res) => {
+  res.render('add', {
+    layout: 'layout/main-layouts',
+    title: 'Add Contact',
+    errno: '',
+    contact: null
+  });
+});
+
+// Add contact post
+app.post(
+  '/contact',
+  [
+    body('name')
+      .notEmpty().withMessage('Name is required')
+      .custom(value => {
+        if (isDuplicateName(value)) throw new Error('Contact name already exists');
+        return true;
+      }),
+    body('email')
+      .notEmpty().withMessage('Email is required')
+      .isEmail().withMessage('Email is not valid'),
+    body('mobile')
+      .notEmpty().withMessage('Phone is required')
+      .isMobilePhone('id-ID').withMessage('Mobile number is not valid')
+  ],
+  (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.render('add', {
+        layout: 'layout/main-layouts',
+        title: 'Add Contact',
+        errno: errors.array()[0].msg,
+        contact: req.body
+      });
+    }
+
+    addContact(req.body);
+    res.redirect('/contact');
+  }
+);
+
+// Contact detail
+app.get('/contact/:name', (req, res) => {
+  const contact = findContact(req.params.name);
+  if (!contact) return res.status(404).send('Contact not found');
+
+  res.render('detail', {
+    layout: 'layout/main-layouts',
+    title: 'Detail Contact',
     contact
   });
 });
 
-//route add
-app.get('/contact/add',(req,res)=>{
-  res.render('add',{
-    layout: 'layout/main-layouts',
-    title: 'Add Page',
-    errno:"hi"
-  })
-})
-
-//route data - transcive data 
-const controllData = (req,res,next) => {
-  const {name,email,number} = req.body;
-  const resultData = saveContact(name,email,number);
-  if(!resultData.valid){ 
-    res.render('add',{
-      title: 'add page',
-      layout: 'layout/main-layouts',
-      errno: resultData.message || 'welcome'
-    });
-  } else {
-    res.redirect('/contact');
-  }
-};
-
-app.post('/contact/add', controllData)
-
-
-//route get contact to detail
-app.get('/contact/:name', (req, res) => {
+// Update page (reuses add.ejs)
+app.get('/contact/update/:name', (req, res) => {
   const contact = findContact(req.params.name);
-  res.render('detail',
-    {
-      layout:'layout/main-layouts',
-      title:'Detail Contact',
-      contact: contact,
-    }
-  );
-});
+  if (!contact) return res.status(404).send('Contact not found');
 
-
-// Route About
-app.get('/about', (req, res, next) => {
-  res.render('about', {
+  res.render('add', {
     layout: 'layout/main-layouts',
-    title: "About EJS"
+    title: 'Update Contact',
+    errno: 'Update your contact info',
+    contact
   });
 });
 
+// Delete contact
+app.get('/contact/delete/:name', (req, res) => {
+  const contact = findContact(req.params.name);
+  if (!contact) return res.status(404).send('Contact not found');
 
-//Route testing !!
-app.get('/tester',(req,res)=>{
-  res.render('tester',{
+  delData(req.params.name);
+  res.redirect('/contact');
+});
+
+// About
+app.get('/about', (req, res) => {
+  res.render('about', {
     layout: 'layout/main-layouts',
-    title: 'Tester Web'
-  })
-})
-
-//Route Tester!!
-app.post('/result', (req, res) => {
-  const name = req.body.name;  // Ambil data 'name' dari body request
-  res.send(`Nama yang dikirim: ${name}`);
+    title: 'About EJS'
+  });
 });
 
-// Route Produk
-app.get('/produk/:id', (req, res) => {
-  res.send(`
-    product ID = ${req.params.id} 
-    <br> category = ${req.query.category}
-  `);
-});
-
-// 404 Handler - middleware
-app.use('/', (req, res) => {
-  res.status(404).send('page not found');
+// 404 handler
+app.use((req, res) => {
+  res.status(404).send('Page not found');
 });
 
 // Start server
 app.listen(port, () => {
-  console.log(`Example app listening on port [${port}]`);
+  console.log(`Server running at http://localhost:${port}`);
 });

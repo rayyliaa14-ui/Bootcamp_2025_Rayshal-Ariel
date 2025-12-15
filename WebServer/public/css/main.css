@@ -179,6 +179,16 @@ p {
     flex-direction: column;
 }
 
+.regis-input form {
+    /* background-color: red; */
+    width: 80%;
+    height: 250px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
 .regis-input .reg-input {
     background-color: rgb(43, 42, 42);
     border: 1px solid rgb(227, 227, 227);

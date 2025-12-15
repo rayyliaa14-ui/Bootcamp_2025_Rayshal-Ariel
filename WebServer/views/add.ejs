@@ -2,24 +2,25 @@
   <div class="form-container">
     <div class="regis-form">
       <img src="/image/registpfp.png" alt="regpfp">
-      <p><%= errno %></p>
-    </div>
-    
-      <form action="/contact/add/" method="post">
-        <div class="regis-input">
-          <input type="text" placeholder="Fullname" class="reg-input" name="name" required><br>
-          <input type="email" placeholder="Email" class="reg-input" name="email" required><br>
-          <input type="text" id="phone" placeholder="Mobile number" class="reg-input" name="number" required><br>
-          <input type="submit" class="button">
-        </div>
+      <% if(errno) { %>
+        <p><%= errno %></p>
+      <% } %>
+    </div>   
+
+    <div class="regis-input">
+      <form action="/contact" method="post">
+        <input type="text" placeholder="Fullname" name="name" class="reg-input" value="<%= contact ? contact.name : '' %>" required><br>
+        <input type="email" placeholder="Email" name="email" class="reg-input" value="<%= contact ? contact.email : '' %>" required><br>
+        <input type="text" placeholder="Mobile number" name="mobile" id="phone" class="reg-input" value="<%= contact ? contact.mobile : '' %>" pattern="[0-9]{10,15}" required><br>
+        <input type="submit" class="button">
       </form>
-      
+    </div>
   </div>
 </div>
 
 <script>
-  const phoneInput = document.getElementById('phone'); //id = phone
-    phoneInput.addEventListener('input',  (obj) => {
-    obj.target.value = obj.target.value.replace(/[^0-9]/g, ''); 
+  const phoneInput = document.getElementById('phone'); 
+  phoneInput.addEventListener('input', e => {
+    e.target.value = e.target.value.replace(/[^0-9]/g, '');
   });
 </script>
