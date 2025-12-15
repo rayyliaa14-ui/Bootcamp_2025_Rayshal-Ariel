@@ -24,6 +24,10 @@
         <td><%= c.mobile %></td>
           <td>
           <a href="/contact/<%= c.name %>" class="btn btn-primary">Detail</a>
+          <a href="/contact/update/<%= c.name %>" class="btn btn-warning">Update</a>
+          <a href="/contact/delete/<%= c.name %>" class="btn btn-danger" 
+            onclick="return confirm('are you sure want to delete <%=c.name %>?');"
+            >Delete</a>
           </td>
       </tr>
       <% })%>

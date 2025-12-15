@@ -5,3 +5,7 @@ NPM/node_modules
 WebServer/node_modules
 WebServer/package.json
 WebServer/package-lock.json
+node_modules
+package-lock.json
+Self_practice
+node_modules/

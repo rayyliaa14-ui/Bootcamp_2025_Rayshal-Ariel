@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "express-validator": "^7.3.1",
+    "urlencode": "^2.0.0"
+  }
+}
