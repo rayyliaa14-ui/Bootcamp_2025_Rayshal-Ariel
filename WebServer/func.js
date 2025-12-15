@@ -5,11 +5,9 @@ const filePath = './data/contact.json';
 
 // Load all contacts
 const loadContact = () => {
-  try {
-    return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-  } catch (err) {
-    return [];
-  }
+  const fileData = fs.readFileSync(filePath,'utf-8');
+    const contactData = JSON.parse(fileData); 
+    return contactData;
 };
 
 // Save all contacts
@@ -24,8 +22,8 @@ const validationData = (contact_input) => {
   // Duplicate check
   const duplicate = contacts.find(
     c => c.name.toLowerCase() === contact_input.name.toLowerCase() ||
-         (contact_input.email && c.email.toLowerCase() === contact_input.email.toLowerCase()) ||
-         (contact_input.mobile && c.mobile === contact_input.mobile)
+      (contact_input.email && c.email.toLowerCase() === contact_input.email.toLowerCase()) ||
+      (contact_input.mobile && c.mobile === contact_input.mobile)
   );
 
   if (duplicate) return { valid: false, message: 'Your data already exists' };
@@ -57,4 +55,21 @@ const delData = (name) => {
   saveContact(filtered);
 };
 
-module.exports = { loadContact, addContact, validationData, delData };
+//update contact 
+const updateData = (data_input) => { 
+  const contacts = loadContact();
+  const contactIndex = contacts.findIndex(
+    (c) => c.name.toLowerCase() === data_input.oldName.toLowerCase());
+    if(contactIndex === -1) return false;
+const newData = {
+  name:data_input.name,
+  email:data_input.email,
+  mobile:data_input.mobile
+};
+contacts[contactIndex] = newData;
+saveContact(contacts);
+
+return true;
+}
+
+module.exports = { loadContact, addContact, validationData, delData, updateData };

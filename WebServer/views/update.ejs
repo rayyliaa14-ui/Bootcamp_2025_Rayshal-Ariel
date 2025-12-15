@@ -1,0 +1,27 @@
+<div class="add-container">
+  <div class="form-container">
+    <div class="regis-form">
+      <img src="/image/registpfp.png" alt="regpfp">
+      <% if(errno) { %>
+        <p><%= errno %></p>
+      <% } %>
+    </div>   
+
+    <div class="regis-input">
+      <form action="/contact/update" method="post">
+        <input type="hidden" name="oldName" value="<%= contact.name %>">
+        <input type="text" placeholder="Fullname" name="name" class="reg-input" value="<%= contact.name %>" required><br>
+        <input type="email" placeholder="Email" name="email" class="reg-input" value="<%= contact.email%>" required><br>
+        <input type="text" placeholder="Mobile number" name="mobile" id="phone" class="reg-input" value="<%= contact.mobile %>" pattern="[0-9]{10,15}" required><br>
+        <input type="submit" class="button">
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  const phoneInput = document.getElementById('phone'); 
+  phoneInput.addEventListener('input', e => {
+    e.target.value = e.target.value.replace(/[^0-9]/g, '');
+  });
+</script>
