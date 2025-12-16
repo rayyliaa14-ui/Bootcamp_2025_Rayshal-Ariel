@@ -2,6 +2,8 @@ const express = require('express');
 const expressLayout = require('express-ejs-layouts');
 const morgan = require('morgan');
 
+const pool = require('./config/db_connect');
+
 const app = express();
 const port = 3000;
 

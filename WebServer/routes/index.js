@@ -2,12 +2,13 @@ const express = require('express');
 const router = express.Router();
 const { loadContact } = require('../func');
 
-router.get('/', (req, res) => {
+router.get('/', async(req, res) => {
+  const contacts_db = await loadContact();
   res.render('index', {
     name: 'rayshal',
     title: 'Webserver EJS',
     layout: 'layout/main-layouts',
-    contact: loadContact()
+    contact: contacts_db
   });
 });
 
