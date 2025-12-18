@@ -5,16 +5,24 @@ import Navbar from "./component/navbar";
 import "./App.css";
 
 function App() {
-  const message = {
-    say: "halo ",
-    name: "ray",
+  const BacaTopik = () => {
+    const topics = ["React + Vite", "JSX", "Variable JSX"];
+    return topics.map((now_topic) => <li>{now_topic}</li>);
   };
-  const date = new Date();
-  const time = date.toLocaleTimeString();
   return (
     <>
-      <h1>{message.say + message.name}</h1>
-      <h1>Today is {time}</h1>
+      <Navbar />
+      <div className="content">
+        <h1>Bootcamp react</h1>
+        <p>Batch : 17</p>
+        <p>materi : React JS</p>
+        <p>mentor : Nisa</p>
+        <br />
+        <h2>Topik Hari ini</h2>
+        <ul>
+          <BacaTopik />
+        </ul>
+      </div>
     </>
   );
 }
