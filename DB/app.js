@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-const pool = require("./db");
+const pool = require("./db"); // connect to db
 
 app.use(express.json());
 const port = 3000;

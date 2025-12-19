@@ -86,11 +86,12 @@ const delData = async (name) => {
 const updateData = async (data_input) => {
   try{
     const contacts = await loadContact();
+    //cari nama yang sama
     const findSameName = contacts.findIndex(
     (c) => c.name.toLowerCase() === data_input.name.toLowerCase()
     );
     if (findSameName !== -1) return false;
-      // console.log(data_input.name);
+      // cari nama lama by index
       const contactIndex = contacts.findIndex(
       (c) => c.name.toLowerCase() === data_input.oldName.toLowerCase()
       );
