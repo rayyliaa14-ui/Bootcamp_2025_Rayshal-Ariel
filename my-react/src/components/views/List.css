@@ -1,0 +1,44 @@
+.upperlist-container{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: #282C33;
+}
+
+.list-container{
+    margin-top: 50px;
+    height: auto;
+    width: 65%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+.list-box{
+    height: auto;
+    width: 130px;
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+.list-box p {
+    padding: 10px;
+}
+
+.list-box .header{
+    border: 1px solid white;
+}
+.list-box .bio{
+    border: 1px solid white;
+}
+.list-box .button{
+    border: 1px solid white;
+}
+.list-box .button button{
+    border: none;
+    background-color: #282C33;
+}
+.list-box .button button:hover{
+    border: none;
+    background-color: #3f454f;
+}

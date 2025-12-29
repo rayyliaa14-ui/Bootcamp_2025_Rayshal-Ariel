@@ -1,0 +1,23 @@
+.PhotoCard {
+    break-inside: avoid;
+    margin-bottom: 16px;
+}
+
+.PhotoCard img {
+    width: 100%;
+    display: block;
+    border-radius: 16px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.PhotoCard img:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.PhotoCard .author {
+    margin-top: 8px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+}

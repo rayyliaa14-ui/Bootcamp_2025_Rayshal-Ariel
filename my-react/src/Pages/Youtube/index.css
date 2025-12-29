@@ -1,0 +1,17 @@
+.home {
+  padding: 20px;
+  background-color: #0f0f0f;
+  min-height: 100vh;
+}
+.video-feed {
+    margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+.loading {
+  color: white;
+  text-align: center;
+  padding: 50px;
+  font-size: 18px;
+}

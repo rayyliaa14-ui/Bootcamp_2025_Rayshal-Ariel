@@ -1,0 +1,49 @@
+.pinterest-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: #1a1a1a;
+  margin-bottom: 20px;
+  border-radius: 12px;
+}
+
+.pinterest-navbar .logo {
+  color: #e60023;
+  font-size: 24px;
+  margin: 0;
+}
+
+.pinterest-navbar .search-form {
+  display: flex;
+  gap: 8px;
+
+}
+
+.pinterest-navbar input {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 24px;
+  background: #333;
+  color: white;
+  width: 300px;
+  font-size: 14px;
+}
+
+.pinterest-navbar input::placeholder {
+  color: #888;
+}
+
+.pinterest-navbar button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 24px;
+  background: #e60023;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.pinterest-navbar button:hover {
+  background: #ad081b;
+}

@@ -7,7 +7,7 @@
   justify-content: space-between;
   align-items: center;
   
-  background-color: #111;
+  background-color: #282C33;
   color: white;
   
   box-sizing: border-box;
@@ -16,7 +16,7 @@
 .logo h1 {
   margin: 0;
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .nav-menu {
@@ -34,4 +34,7 @@
 
 .nav-item:hover {
   color: #646cff;
+}
+.nav-item a{
+  color: white;
 }

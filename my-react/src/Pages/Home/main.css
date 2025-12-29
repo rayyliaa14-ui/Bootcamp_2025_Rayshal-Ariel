@@ -1,0 +1,9 @@
+.ui.main-container {
+  width: 120vh;
+  margin: 40px auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-radius: 12px;
+}

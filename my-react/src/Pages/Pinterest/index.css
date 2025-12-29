@@ -1,0 +1,36 @@
+.Pinterest {
+    padding: 20px;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.photo-feed {
+    columns: 4;
+    column-gap: 16px;
+}
+
+@media (max-width: 1200px) {
+    .photo-feed {
+        columns: 3;
+    }
+}
+
+@media (max-width: 900px) {
+    .photo-feed {
+        columns: 2;
+    }
+}
+
+@media (max-width: 600px) {
+    .photo-feed {
+        columns: 1;
+    }
+}
+
+.loading,
+.loading-more,
+.end-message {
+    text-align: center;
+    padding: 20px;
+    color: rgba(255, 255, 255, 0.7);
+}

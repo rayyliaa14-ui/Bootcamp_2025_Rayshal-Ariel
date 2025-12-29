@@ -1,4 +1,8 @@
 import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Counting from "../../components/ui/Counting";
+import CountState from "../../components/ui/CountState";
+import Clock from "../../components/ui/Clock";
 
 const Playground = () => {
   const BacaTopik = () => {
@@ -18,9 +22,12 @@ const Playground = () => {
           <BacaTopik />
         </ul>
         <br />
-        <a href="/comment">
+        <Link to="/comment">
           <button>Comment Here</button>
-        </a>
+        </Link>
+        <Counting />
+        <CountState />
+        <Clock />
       </div>
     </>
   );

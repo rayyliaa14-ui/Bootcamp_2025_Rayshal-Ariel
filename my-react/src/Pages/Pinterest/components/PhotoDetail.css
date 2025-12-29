@@ -1,0 +1,82 @@
+.ui-containers {
+    /* background-color: grey; */
+    padding: 20px;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+.image-container {
+
+    columns: 4;
+    column-gap: 16px;
+}
+@media (max-width: 1200px) {
+    .image-container {
+        columns: 3;
+    }
+}
+@media (max-width: 900px) {
+    .image-container {
+        columns: 2;
+    }
+}
+@media (max-width: 600px) {
+    .image-container {
+        columns: 1;
+    }
+}
+
+.ImageCard {
+    break-inside: avoid;
+    margin-bottom: 16px;
+    display: inline-block;  
+    width: 100%;
+}
+.ImageCard img {
+    width: 100%;
+    display: block;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.ImageCard img:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+/* Style untuk teks deskripsi */
+
+
+.ImageCard p,
+.ImageCard .description {
+    
+    margin-top: 8px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.first-image {
+    background-color: #343a43;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    padding-top: 5px;
+}
+
+.image-sect{
+    margin-left: 5px;
+}
+
+.image-sect img {
+    border-radius: 20px;
+}
+
+.bio-sect {
+    margin-top: 20px;
+    margin-left: 20px;
+
+}
+
+.title-sect {
+
+    width: 75%;
+}
