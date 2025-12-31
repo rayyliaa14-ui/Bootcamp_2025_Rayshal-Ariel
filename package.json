@@ -1,8 +1,10 @@
 {
   "dependencies": {
+    "axios": "^1.13.2",
     "express": "^5.2.1",
     "express-validator": "^7.3.1",
     "pg": "^8.16.3",
+    "redux": "^5.0.1",
     "urlencode": "^2.0.0"
   }
 }
